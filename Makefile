@@ -39,8 +39,7 @@ haproxy/certs.pem: $(certs)
 
 # Note I use order only prerequisite so that pem file is generated ONLY if it does not exist and not whenever the habk file is newer
 %.pem: | %.cfg
-	vhost=$$(head -n 1 $| | sed 's/^[# ]*//')
-	openssl req -config config/openssl_req.cfg -subj /CN=$(vhost) -new -x509 -sha256 -newkey rsa:2048 -nodes -keyout tmp/key.pem -days 365 -out tmp/cert.pem
+	openssl req -config config/openssl_req.cfg -subj /CN=$$(head -n 1 $| | sed 's/^[# ]*//') -new -x509 -sha256 -newkey rsa:2048 -nodes -keyout tmp/key.pem -days 365 -out tmp/cert.pem
 	cat tmp/cert.pem tmp/key.pem > $@
 	rm -f tmp/cert.pem tmp/key.pem
 
