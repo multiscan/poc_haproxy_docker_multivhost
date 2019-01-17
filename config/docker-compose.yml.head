@@ -1,0 +1,24 @@
+# docker-compose exec proxy sh
+version: '3.5'
+
+services:
+  proxy:
+    image: haproxy
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy/:ro
+    ports:
+      - 4443:443
+      - 4433:3333
+    networks:
+
+  # proxy_test:
+  #   image: haproxy
+  #   volumes:
+  #     - ./haproxy:/usr/local/etc/haproxy/:ro
+  #   command: ["bash"]
+  #   # command: ["haproxy", "-c", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+  #   networks:
+  #     - app1_default
+  #     - app2_default
+
+networks:

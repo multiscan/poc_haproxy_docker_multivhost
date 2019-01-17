@@ -1,0 +1,6 @@
+version: '3.5'
+
+services:
+  webapp1:
+    image: tutum/hello-world
+    restart: always
